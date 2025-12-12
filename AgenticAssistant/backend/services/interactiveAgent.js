@@ -366,4 +366,6 @@ function parseDecision(text) {
     return { action: 'done', reason: 'Failed to parse JSON' };
 }
 
-module.exports = { runActiveLoop };
+const getInjectionScript = () => INJECT_OVERLAY_SCRIPT;
+
+module.exports = { runActiveLoop, getInjectionScript };

@@ -81,21 +81,30 @@ async function startPersistentBrowser() {
         await runActiveLoop('persistent-session', globalPage, goal);
     });
 
-    // Load initial page and inject dock
-    await globalPage.goto('https://www.google.com');
+    // Load initial page (Use DuckDuckGo to avoid Google CAPTCHA on boot)
+    await globalPage.goto('https://duckduckgo.com');
 
-    // Inject dock script initially
-    // Note: The loop re-injects it on navigation, but we need it at start.
-    // We import the script via require in a real setup, but here we can just execute logic from `interactiveAgent`.
-    // Since we can't easily import the const string from another file without exporting it, 
-    // we will rely on `runActiveLoop` to inject it when triggered, 
-    // BUT we want the input box visible immediately.
-    // Hack: We'll trigger a dummy loop or just inject it here.
+    // --- CRITICAL: INJECT DOCK UI ---
+    // We need the dock to be there so the user can type "Order Pizza"
+    const { getInjectionScript } = require('./interactiveAgent');
+    const injectDock = async () => {
+        try {
+            await globalPage.evaluate(getInjectionScript());
+        } catch (e) {
+            console.log("Dock injection failed (likely context invalid):", e.message);
+        }
+    };
 
-    // For MVP, we will rely on the user triggering it via the External UI ONCE to start the process, 
-    // OR we trigger a "Hello" loop.
+    // 1. Inject immediately
+    await injectDock();
 
-    // Better: Allow the interactiveAgent to export an injection function.
+    // 2. Persist on Navigation (Re-inject when page changes)
+    globalPage.on('domcontentloaded', async () => {
+        console.log("Page navigated, re-injecting agent dock...");
+        await injectDock();
+    });
+
+    console.log("Agent Dock is active.");
 }
 
 async function runSteps(sessionId, plan, mode) {
