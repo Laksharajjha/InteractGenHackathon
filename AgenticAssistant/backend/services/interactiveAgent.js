@@ -5,7 +5,7 @@ const axios = require('axios');
 const DOM_SNAPSHOT_SCRIPT = `
 (function() {
     let idCounter = 1;
-    const elements = document.querySelectorAll('button, a, input, textarea, select, [role="button"], [role="link"], [role="option"]');
+    const elements = document.querySelectorAll('button, a, input, textarea, select, [role="button"], [role="link"], [role="option"], li');
     const items = [];
     
     elements.forEach(el => {
@@ -201,6 +201,55 @@ const INJECT_OVERLAY_SCRIPT = `
         if (e.key === 'Enter') submit();
     });
     
+    // Highlight Visualization
+    window.highlightElement = (id) => {
+        const el = document.querySelector(\`[data-agent-id="\${id}"]\`);
+        if (!el) return;
+        
+        // Scroll into view nicely
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Apply glow effect
+        const originalTransition = el.style.transition;
+        const originalBoxShadow = el.style.boxShadow;
+        const originalOutline = el.style.outline;
+        
+        el.style.transition = 'all 0.3s ease';
+        el.style.outline = '2px solid #a855f7'; // Purple
+        el.style.boxShadow = '0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)';
+        
+        // Create a floating label
+        const label = document.createElement('div');
+        label.innerText = 'Target 🎯';
+        label.style.position = 'absolute';
+        label.style.background = '#a855f7';
+        label.style.color = 'white';
+        label.style.padding = '2px 6px';
+        label.style.borderRadius = '4px';
+        label.style.fontSize = '10px';
+        label.style.fontWeight = 'bold';
+        label.style.zIndex = '999999';
+        label.style.top = '-20px';
+        label.style.left = '0';
+        label.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+        
+        // Handle positioning (simple append for now, better would be absolute body positioning)
+        // For robustness, we just append to body and calculate pos
+        const rect = el.getBoundingClientRect();
+        label.style.position = 'fixed';
+        label.style.top = (rect.top - 20) + 'px';
+        label.style.left = rect.left + 'px';
+        document.body.appendChild(label);
+
+        // Remove after 2 seconds
+        setTimeout(() => {
+            el.style.outline = originalOutline;
+            el.style.boxShadow = originalBoxShadow;
+            el.style.transition = originalTransition;
+            if (label.parentNode) label.parentNode.removeChild(label);
+        }, 2000);
+    };
+
     // Listen for status updates from backend
     window.updateAgentStatus = (icon, text) => {
         statusBar.classList.remove('agent-status-hidden');
@@ -248,6 +297,23 @@ async function runActiveLoop(sessionId, page, goal) {
 
                 const currentUrl = page.url();
 
+                // --- CAPTCHA DETECTION / HUMAN HANDOFF ---
+                const pageText = await page.evaluate(() => document.body.innerText.toLowerCase());
+                if (pageText.includes('verify you are human') ||
+                    pageText.includes('security check') ||
+                    pageText.includes('challenge-platform') ||
+                    (pageText.includes('captcha') && pageText.length < 2000)) { // Short page + captcha = blockage
+
+                    await updateOverlay(page, '🛑', 'CAPTCHA Detected! Please solve it for me.');
+                    addLog(sessionId, { type: 'info', message: '🛑 Agent paused for Manual CAPTCHA solution.' });
+
+                    // Wait for user to solve it (15 seconds)
+                    await page.waitForTimeout(15000);
+
+                    await updateOverlay(page, '👀', 'Thanks! Resuming scan...');
+                    continue; // Skip this loop iteration and re-scan
+                }
+
                 // 2. THINK
                 await updateOverlay(page, '🧠', 'Thinking...');
 
@@ -263,11 +329,12 @@ async function runActiveLoop(sessionId, page, goal) {
                 
                 RULES:
                 1. **Prioritize Location**: If site asks for location/address (e.g. Swiggy/UberEats), set it first!
-                2. **Be Precise**: Use the exact ID of the element.
-                3. **Handle Search**: If searching, fill input then click search button or press Enter.
-                4. **Done**: If goal is met, action: "done".
+                2. **Search Engines**: If on Google/DuckDuckGo, you MUST click a result to leave the search engine.
+                3. **Autocomplete**: For "From"/"To" or "Location" fields, do NOT hit Enter immediately. Type the text, then in the next step, CLICK the correct suggestion from the list.
+                4. **Be Precise**: Use the exact ID of the element.
+                5. **Done**: Only say "done" if you are on the final service page.
                 
-                Return JSON: { "action": "click"|"fill"|"goto"|"done", "target": "ID", "value": "text", "reason": "user-facing short thought" }
+                Return JSON: { "action": "click"|"fill"|"goto"|"done", "target": "ID", "value": "text", "reason": "reason" }
                 `;
 
                 addLog(sessionId, { type: 'step', step: { action: 'thinking', target: 'AI is planning...' }, status: 'running' });
@@ -298,11 +365,33 @@ async function runActiveLoop(sessionId, page, goal) {
                     await page.waitForLoadState('domcontentloaded');
                     await page.evaluate(INJECT_OVERLAY_SCRIPT);
                 } else if (decision.action === 'click') {
+                    // HIGHLIGHT BEFORE CLICK
+                    await page.evaluate((id) => window.highlightElement && window.highlightElement(id), decision.target);
+                    await page.waitForTimeout(800); // Visual pause for effect
+
                     await page.click(`[data-agent-id="${decision.target}"]`, { timeout: 5000 });
                 } else if (decision.action === 'fill') {
+                    // HIGHLIGHT BEFORE FILL
+                    await page.evaluate((id) => window.highlightElement && window.highlightElement(id), decision.target);
+                    await page.waitForTimeout(800);
+
                     const selector = `[data-agent-id="${decision.target}"]`;
-                    await page.fill(selector, decision.value);
-                    if (decision.value && (decision.reason.toLowerCase().includes('search') || decision.reason.toLowerCase().includes('enter'))) {
+                    // Slow typing to trigger JS events
+                    await page.click(selector); // Focus first
+                    await page.type(selector, decision.value, { delay: 150 });
+
+                    // IMPROVED AUTOCOMPLETE HANDLING:
+                    // For search/location inputs, we almost always want to pick the first result.
+                    // The most reliable way is: Type -> Wait -> ArrowDown -> Enter
+                    if (decision.reason.toLowerCase().includes('search') ||
+                        decision.reason.toLowerCase().includes('enter') ||
+                        decision.reason.toLowerCase().includes('location') ||
+                        decision.reason.toLowerCase().includes('station') ||
+                        decision.reason.toLowerCase().includes('city')) {
+
+                        await page.waitForTimeout(2000); // Wait for dropdown results to render
+                        await page.press(selector, 'ArrowDown');
+                        await page.waitForTimeout(500);
                         await page.press(selector, 'Enter');
                     }
                 }

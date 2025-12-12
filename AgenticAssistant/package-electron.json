@@ -1,0 +1,20 @@
+{
+    "name": "agentic-assistant-desktop",
+    "version": "1.0.0",
+    "description": "AI Agent for Web Automation",
+    "main": "electron/main.js",
+    "scripts": {
+        "electron:dev": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "author": "Antigravity",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^28.0.0",
+        "electron-builder": "^24.9.1"
+    },
+    "dependencies": {
+        "wait-on": "^7.2.0"
+    }
+}

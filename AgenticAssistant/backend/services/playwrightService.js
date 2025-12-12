@@ -50,26 +50,55 @@ async function startPersistentBrowser() {
     globalBrowser = await chromium.launch({
         headless: false,
         channel: 'chrome',
+        ignoreDefaultArgs: ['--enable-automation'],
         args: [
+            '--disable-blink-features=AutomationControlled',
             '--no-sandbox',
             '--disable-setuid-sandbox',
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
-            '--window-size=1280,720'
+            '--disable-infobars',
+            '--window-position=0,0',
+            '--window-size=1280,720',
+            '--start-maximized'
         ]
     });
 
     const context = await globalBrowser.newContext({
         userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
-        viewport: null, // Let window resize
+        viewport: null,
         locale: 'en-US',
         timezoneId: 'Asia/Kolkata',
-        permissions: ['geolocation'],
+        permissions: ['geolocation', 'notifications'],
     });
 
-    // Anti-detect
+    // Advanced Anti-detect / Stealth
     await context.addInitScript(() => {
+        // 1. Pass Webdriver Test
         Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+
+        // 2. Mock Window.Chrome
+        window.chrome = { runtime: {} };
+
+        // 3. Mock Plugins
+        Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+        Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+
+        // 4. Mock Permissions
+        const originalQuery = window.navigator.permissions.query;
+        window.navigator.permissions.query = (parameters) => (
+            parameters.name === 'notifications' ?
+                Promise.resolve({ state: Notification.permission }) :
+                originalQuery(parameters)
+        );
+
+        // 5. WebGL Vendor Spoofing (Hide "Google SwiftShader")
+        const getParameter = WebGLRenderingContext.prototype.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function (parameter) {
+            // UNMASKED_VENDOR_WEBGL
+            if (parameter === 37445) return 'Intel Inc.';
+            // UNMASKED_RENDERER_WEBGL
+            if (parameter === 37446) return 'Intel Iris OpenGL Engine';
+            return getParameter.apply(this, [parameter]);
+        };
     });
 
     globalPage = await context.newPage();
