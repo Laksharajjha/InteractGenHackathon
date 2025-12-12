@@ -1,0 +1,27 @@
+{
+  "id": "e7e6b71a-715e-485d-ad75-52076a727535",
+  "startTime": "2025-12-12T14:28:43.829Z",
+  "mode": "simulate",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "http://localhost:5173/demo-site/index.html"
+    },
+    {
+      "action": "click",
+      "target": "Margherita Pizza"
+    },
+    {
+      "action": "fill",
+      "target": "checkout-form",
+      "data": {
+        "useProfile": true
+      }
+    },
+    {
+      "action": "click",
+      "target": "#place-order-btn"
+    }
+  ],
+  "logs": []
+}

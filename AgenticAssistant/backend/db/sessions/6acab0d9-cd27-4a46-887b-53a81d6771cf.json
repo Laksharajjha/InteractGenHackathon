@@ -1,0 +1,81 @@
+{
+  "id": "6acab0d9-cd27-4a46-887b-53a81d6771cf",
+  "startTime": "2025-12-12T14:53:42.585Z",
+  "mode": "simulate",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.google.com"
+    },
+    {
+      "action": "fill",
+      "target": "textarea[name=\"q\"]",
+      "data": {
+        "value": "nearest station"
+      }
+    },
+    {
+      "action": "click",
+      "target": "input[name=\"btnK\"]"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T14:53:45.243Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:53:45.872Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:53:46.876Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "textarea[name=\"q\"]",
+        "data": {
+          "value": "nearest station"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:53:46.921Z",
+      "type": "step_complete",
+      "step": {
+        "action": "fill",
+        "target": "textarea[name=\"q\"]",
+        "data": {
+          "value": "nearest station"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:53:47.924Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": "input[name=\"btnK\"]"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:53:48.166Z",
+      "type": "step_complete",
+      "step": {
+        "action": "click",
+        "target": "input[name=\"btnK\"]"
+      }
+    }
+  ]
+}

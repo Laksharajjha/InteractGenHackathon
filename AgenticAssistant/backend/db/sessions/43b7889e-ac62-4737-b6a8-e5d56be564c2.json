@@ -1,0 +1,90 @@
+{
+  "id": "43b7889e-ac62-4737-b6a8-e5d56be564c2",
+  "startTime": "2025-12-12T14:35:58.738Z",
+  "mode": "simulate",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "http://localhost:3000/demo/index.html"
+    },
+    {
+      "action": "click",
+      "target": "[data-item=\"pizza-btn\"]"
+    },
+    {
+      "action": "fill",
+      "target": "#checkout-form",
+      "data": {
+        "useProfile": true
+      }
+    },
+    {
+      "action": "click",
+      "target": "#place-order-btn"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T14:36:00.028Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:36:00.518Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:36:01.521Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": "[data-item=\"pizza-btn\"]"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:36:01.591Z",
+      "type": "step_complete",
+      "step": {
+        "action": "click",
+        "target": "[data-item=\"pizza-btn\"]"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:36:02.593Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "#checkout-form",
+        "data": {
+          "useProfile": true
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:36:02.623Z",
+      "type": "step_complete",
+      "step": {
+        "action": "fill",
+        "target": "#checkout-form",
+        "data": {
+          "useProfile": true
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:36:03.626Z",
+      "type": "info",
+      "message": "Stopping before submit (Simulation)"
+    }
+  ]
+}

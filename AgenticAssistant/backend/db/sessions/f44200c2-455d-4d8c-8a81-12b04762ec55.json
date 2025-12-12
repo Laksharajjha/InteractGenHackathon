@@ -1,0 +1,58 @@
+{
+  "id": "f44200c2-455d-4d8c-8a81-12b04762ec55",
+  "startTime": "2025-12-12T15:23:43.485Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.swiggy.com/"
+    },
+    {
+      "action": "fill",
+      "target": "input[placeholder='Enter delivery location']",
+      "data": {
+        "value": "biryani"
+      }
+    },
+    {
+      "action": "click",
+      "target": "div[class*='_2W-T9']"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:23:46.350Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:23:47.004Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:23:48.005Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "input[placeholder='Enter delivery location']",
+        "data": {
+          "value": "biryani"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:24:18.020Z",
+      "type": "error",
+      "error": "page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[placeholder=\\'Enter delivery location\\']')\u001b[22m\n\u001b[2m    - waiting for\" https://www.swiggy.com/\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://www.swiggy.com/\"\u001b[22m\n"
+    }
+  ]
+}

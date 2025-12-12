@@ -1,0 +1,58 @@
+{
+  "id": "c5126bc1-b9c5-4bcc-8804-45f98ed9606e",
+  "startTime": "2025-12-12T14:48:40.186Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.google.com"
+    },
+    {
+      "action": "fill",
+      "target": "input[name=\"q\"]",
+      "data": {
+        "value": "temperature in my location"
+      }
+    },
+    {
+      "action": "click",
+      "target": "input[name=\"btnK\"]"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T14:48:42.951Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:48:43.576Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:48:44.581Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "input[name=\"q\"]",
+        "data": {
+          "value": "temperature in my location"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:48:49.778Z",
+      "type": "error",
+      "error": "page.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"q\"]')\u001b[22m\n"
+    }
+  ]
+}

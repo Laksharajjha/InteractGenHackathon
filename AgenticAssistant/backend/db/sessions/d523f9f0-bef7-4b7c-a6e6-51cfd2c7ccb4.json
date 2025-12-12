@@ -1,0 +1,78 @@
+{
+  "id": "d523f9f0-bef7-4b7c-a6e6-51cfd2c7ccb4",
+  "startTime": "2025-12-12T15:02:48.128Z",
+  "mode": "simulate",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.swiggy.com/"
+    },
+    {
+      "action": "fill",
+      "target": "#location",
+      "data": {
+        "value": "biryani"
+      }
+    },
+    {
+      "action": "click",
+      "target": ".xLoqJ"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:02:50.878Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:02:51.648Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:02:52.650Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "#location",
+        "data": {
+          "value": "biryani"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:02:52.936Z",
+      "type": "step_complete",
+      "step": {
+        "action": "fill",
+        "target": "#location",
+        "data": {
+          "value": "biryani"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:02:53.939Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": ".xLoqJ"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:03:25.967Z",
+      "type": "error",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=.xLoqJ')\u001b[22m\n"
+    }
+  ]
+}

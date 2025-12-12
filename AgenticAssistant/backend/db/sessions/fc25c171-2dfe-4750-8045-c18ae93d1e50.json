@@ -1,0 +1,58 @@
+{
+  "id": "fc25c171-2dfe-4750-8045-c18ae93d1e50",
+  "startTime": "2025-12-12T14:55:35.196Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.swiggy.com/"
+    },
+    {
+      "action": "fill",
+      "target": "#location",
+      "data": {
+        "value": "biryani"
+      }
+    },
+    {
+      "action": "click",
+      "target": ".search-bar-container > div:nth-child(1) > div > div > div:nth-child(1)"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T14:55:37.933Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:55:38.720Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:55:39.722Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "#location",
+        "data": {
+          "value": "biryani"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:56:09.727Z",
+      "type": "error",
+      "error": "page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#location')\u001b[22m\n"
+    }
+  ]
+}

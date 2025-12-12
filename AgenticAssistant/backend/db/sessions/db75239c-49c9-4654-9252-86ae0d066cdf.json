@@ -1,0 +1,51 @@
+{
+  "id": "db75239c-49c9-4654-9252-86ae0d066cdf",
+  "startTime": "2025-12-12T14:36:31.991Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "http://localhost:3000/demo/index.html"
+    },
+    {
+      "action": "note",
+      "target": "I am not sure how to do that yet. Opening the demo site."
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T14:36:33.220Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:36:34.016Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T14:36:35.019Z",
+      "type": "step",
+      "step": {
+        "action": "note",
+        "target": "I am not sure how to do that yet. Opening the demo site."
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T14:36:35.019Z",
+      "type": "step_complete",
+      "step": {
+        "action": "note",
+        "target": "I am not sure how to do that yet. Opening the demo site."
+      }
+    }
+  ]
+}

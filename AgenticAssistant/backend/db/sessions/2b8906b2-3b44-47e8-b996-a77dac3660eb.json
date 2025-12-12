@@ -1,0 +1,81 @@
+{
+  "id": "2b8906b2-3b44-47e8-b996-a77dac3660eb",
+  "startTime": "2025-12-12T15:21:43.262Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.google.com"
+    },
+    {
+      "action": "fill",
+      "target": "textarea[name=\"q\"]",
+      "data": {
+        "value": "laksharaj"
+      }
+    },
+    {
+      "action": "click",
+      "target": "input[name=\"btnK\"]"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:21:46.180Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:21:46.694Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://www.google.com"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:21:47.698Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "textarea[name=\"q\"]",
+        "data": {
+          "value": "laksharaj"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:21:47.749Z",
+      "type": "step_complete",
+      "step": {
+        "action": "fill",
+        "target": "textarea[name=\"q\"]",
+        "data": {
+          "value": "laksharaj"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:21:48.753Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": "input[name=\"btnK\"]"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:21:48.935Z",
+      "type": "step_complete",
+      "step": {
+        "action": "click",
+        "target": "input[name=\"btnK\"]"
+      }
+    }
+  ]
+}

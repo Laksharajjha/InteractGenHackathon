@@ -1,0 +1,58 @@
+{
+  "id": "1828606d-f887-4a1f-9803-8cf446f93eba",
+  "startTime": "2025-12-12T15:12:20.389Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://duckduckgo.com"
+    },
+    {
+      "action": "fill",
+      "target": "#search_form_input_homepage",
+      "data": {
+        "value": "current temperature"
+      }
+    },
+    {
+      "action": "click",
+      "target": "#search_button_homepage"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:12:23.179Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://duckduckgo.com"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:12:23.579Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "https://duckduckgo.com"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:12:24.582Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "#search_form_input_homepage",
+        "data": {
+          "value": "current temperature"
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:12:35.935Z",
+      "type": "error",
+      "error": "page.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('#search_form_input_homepage')\u001b[22m\n"
+    }
+  ]
+}

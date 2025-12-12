@@ -1,0 +1,102 @@
+{
+  "id": "7f53fc51-b7eb-4520-ba55-1796ab0c2040",
+  "startTime": "2025-12-12T15:08:36.820Z",
+  "mode": "assist",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "http://localhost:3000/demo/index.html"
+    },
+    {
+      "action": "click",
+      "target": "[data-item=\"pizza-btn\"]"
+    },
+    {
+      "action": "fill",
+      "target": "#checkout-form",
+      "data": {
+        "useProfile": true
+      }
+    },
+    {
+      "action": "click",
+      "target": "#place-order-btn"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:08:39.708Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:08:40.828Z",
+      "type": "step_complete",
+      "step": {
+        "action": "goto",
+        "target": "http://localhost:3000/demo/index.html"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:08:41.834Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": "[data-item=\"pizza-btn\"]"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:08:41.952Z",
+      "type": "step_complete",
+      "step": {
+        "action": "click",
+        "target": "[data-item=\"pizza-btn\"]"
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:08:42.956Z",
+      "type": "step",
+      "step": {
+        "action": "fill",
+        "target": "#checkout-form",
+        "data": {
+          "useProfile": true
+        }
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:08:43.001Z",
+      "type": "step_complete",
+      "step": {
+        "action": "fill",
+        "target": "#checkout-form",
+        "data": {
+          "useProfile": true
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-12T15:08:44.004Z",
+      "type": "step",
+      "step": {
+        "action": "click",
+        "target": "#place-order-btn"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:08:44.036Z",
+      "type": "step_complete",
+      "step": {
+        "action": "click",
+        "target": "#place-order-btn"
+      }
+    }
+  ]
+}

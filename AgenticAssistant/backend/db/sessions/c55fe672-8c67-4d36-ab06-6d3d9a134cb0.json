@@ -1,0 +1,38 @@
+{
+  "id": "c55fe672-8c67-4d36-ab06-6d3d9a134cb0",
+  "startTime": "2025-12-12T15:11:55.227Z",
+  "mode": "simulate",
+  "plan": [
+    {
+      "action": "goto",
+      "target": "https://www.swiggy.com/"
+    },
+    {
+      "action": "fill",
+      "target": "input[placeholder='Enter delivery location']",
+      "data": {
+        "value": "biryani"
+      }
+    },
+    {
+      "action": "click",
+      "target": "button[class*='LocationSuggestionItem_suggestion']"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2025-12-12T15:11:57.972Z",
+      "type": "step",
+      "step": {
+        "action": "goto",
+        "target": "https://www.swiggy.com/"
+      },
+      "status": "running"
+    },
+    {
+      "timestamp": "2025-12-12T15:11:58.834Z",
+      "type": "error",
+      "error": "page.goto: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - navigating to \"https://www.swiggy.com/\", waiting until \"load\"\u001b[22m\n"
+    }
+  ]
+}
